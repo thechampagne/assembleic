@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 enum assemblei_code {
 	assemblei_code_moves_forward,
@@ -128,13 +129,60 @@ void codegen_x86_64_linux(FILE* file, const enum assemblei_code* ins, size_t ins
   codegen_x86_64_linux_footer(file);
 }
 
-int main(void)
+void usage(FILE* file)
 {
-	const char* code = "!+!!!!!!+#";
-	enum assemblei_code codes[512];
-	int i;
-	parser(codes, &i, code);
-	FILE* file = fopen("generated.asm", "w");
-	codegen_x86_64_linux(file,codes, i);
-	return 0;
+  fprintf(file,
+	  "Usage: assembleic [command]\n" \
+	  "Command:\n" \
+	  "  help                Display this information.\n" \
+	  "  com <file>          Compile the program.\n" \
+	  );
+  
+}
+
+
+
+int main(int argc, const char* const* argv)
+{
+  if (argc > 1)
+    {
+      if (strcmp(argv[1], "help") == 0)
+	{
+	  usage(stdout);
+	  return 0;
+	}
+      else if (strcmp(argv[1], "com") == 0)
+	{
+	  if (argc <= 2)
+	    {
+	      fprintf(stderr, "Error: expected file path\n");
+	      exit(1);
+	    }
+	  /*FILE* input;
+	    input = fopen(argv[2], "r");*/
+	  
+	  return 0;
+	}
+      else
+	{
+	  usage(stderr);
+	  fprintf(stderr, "\nError: expected command argument\n");
+	  exit(1);
+	}
+      
+    }
+  else
+    {
+      usage(stderr);
+      fprintf(stderr, "\nError: expected command argument\n");
+      exit(1);
+    }
+  
+	/* const char* code = "!+!!!!!!+#"; */
+	/* enum assemblei_code codes[512]; */
+	/* int i; */
+	/* parser(codes, &i, code); */
+	/* FILE* file = fopen("generated.asm", "w"); */
+	/* codegen_x86_64_linux(file,codes, i); */
+	/* return 0; */
 }
