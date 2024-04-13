@@ -31,9 +31,13 @@ int main(int argc, const char* const* argv)
 	      fprintf(stderr, "Error: expected file path\n");
 	      exit(1);
 	    }
-	  /*FILE* input;
-	    input = fopen(argv[2], "r");*/
-	  
+	  FILE* input;
+	  input = fopen(argv[2], "r");
+	  enum assemblei_instruction inst[512];
+	  size_t len;
+	  assembleic_parser(input,inst,&len, 0);
+	  FILE* file = fopen("generated.asm", "w");
+	  assembleic_codegen_x86_64_linux(file,inst,len);
 	  return 0;
 	}
       else

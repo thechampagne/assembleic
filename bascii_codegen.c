@@ -1,6 +1,6 @@
 #include "assembleic.h"
 
-void codegen_x86_64_linux_header(FILE* file)
+void assembleic_codegen_x86_64_linux_header(FILE* file)
 {
   fprintf(file, "format ELF64 executable 3\n");
   fprintf(file, "segment executable readable\n");
@@ -12,40 +12,40 @@ void codegen_x86_64_linux_header(FILE* file)
   fprintf(file, "mov rdx, 1\n");
 }
 
-void codegen_x86_64_linux_footer(FILE* file)
+void assembleic_codegen_x86_64_linux_footer(FILE* file)
 {
   fprintf(file, "mov rax, 60\n");
   fprintf(file, "mov rdi, 0\n");
   fprintf(file, "syscall");
 }
 
-void codegen_x86_64_linux(FILE* file, const enum assemblei_code* ins, size_t ins_len)
+void assembleic_codegen_x86_64_linux(FILE* file, const enum assemblei_instruction* inst, size_t inst_len)
 {
-  codegen_x86_64_linux_header(file);
-  size_t ip = 0;
+  assembleic_codegen_x86_64_linux_header(file);
+  size_t cp = 0;
   char cells[8] = {0};
   int i;
-  for(i = 0; i < ins_len; i++)
+  for(i = 0; i < inst_len; i++)
     {
-      switch(ins[i])
+      switch(inst[i])
 	{
-	case assemblei_code_moves_forward:
-	  ip++;
+	case ASSEMBLEI_INST_MOVES_FORWARD:
+	  cp++;
 	  break;
-	case assemblei_code_moves_backward:
-	  ip--;
+	case ASSEMBLEI_INST_MOVES_BACKWARD:
+	  cp--;
 	  break;
-	case assemblei_code_print_all:
+	case ASSEMBLEI_INST_PRINT_ALL:
 	  fprintf(file, "mov byte [rsp], %d%d%d%d%d%d%d%db\n", cells[0], cells[1], cells[2], cells[3], cells[4], cells[5], cells[6], cells[7]);
 	  fprintf(file, "syscall\n");
 	  break;
-	case assemblei_code_print_cell:
+	case ASSEMBLEI_INST_PRINT_CELL:
 	  /* TODO */
 	  break;
-	case assemblei_code_increment:
-	  cells[ip]++;
+	case ASSEMBLEI_INST_INCREMENT:
+	  cells[cp]++;
 	  break;
-	case assemblei_code_clear_all:
+	case ASSEMBLEI_INST_CLEAR_ALL:
 	  int j;
 	  for(j = 0; j < 8; j++) cells[j] = 0;
 	  fprintf(file, "mov byte [rsp], 00000000b\n");
@@ -53,5 +53,5 @@ void codegen_x86_64_linux(FILE* file, const enum assemblei_code* ins, size_t ins
 			
 	}
     }
-  codegen_x86_64_linux_footer(file);
+  assembleic_codegen_x86_64_linux_footer(file);
 }
