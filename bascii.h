@@ -1,5 +1,5 @@
-#ifndef __ASSEMBLEIC_H__
-#define __ASSEMBLEIC_H__
+#ifndef __BASCII_H__
+#define __BASCII_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,4 +22,4 @@ void assembleic_codegen_x86_64_linux_footer(FILE* file);
 
 void assembleic_codegen_x86_64_linux(FILE* file, const enum assemblei_instruction* inst, size_t inst_len);
 
-#endif /* __ASSEMBLEIC_H__ */
+#endif /* __BASCII_H__ */
