@@ -1,8 +1,8 @@
-# assembleic
+# Bascii
 
-[![](https://img.shields.io/github/v/tag/thechampagne/assembleic?label=version)](https://github.com/thechampagne/assembleic/releases/latest) [![](https://img.shields.io/github/license/thechampagne/assembleic)](https://github.com/thechampagne/assembleic/blob/main/LICENSE)
+[![](https://img.shields.io/github/v/tag/thechampagne/bascii?label=version)](https://github.com/thechampagne/bascii/releases/latest) [![](https://img.shields.io/github/license/thechampagne/bascii)](https://github.com/thechampagne/bascii/blob/main/LICENSE)
 
-Assemblei is an esoteric programming language that uses binary to form words.
+Bascii is an esoteric programming language that uses binary to form words.
 
 ### Requirements
  - ANSI C Compiler - **C89**
@@ -12,4 +12,4 @@ Assemblei is an esoteric programming language that uses binary to form words.
 
 ### License
 
-This repo is released under the [MIT License](https://github.com/thechampagne/assembleic/blob/main/LICENSE).
+This repo is released under the [MIT License](https://github.com/thechampagne/bascii/blob/main/LICENSE).
