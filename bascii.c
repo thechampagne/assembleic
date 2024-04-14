@@ -5,7 +5,7 @@
 void usage(FILE* file)
 {
   fprintf(file,
-	  "Usage: assembleic [command]\n" \
+	  "Usage: bascii [command]\n" \
 	  "Command:\n" \
 	  "  help                Display this information.\n" \
 	  "  com <file>          Compile the program.\n" \
@@ -33,11 +33,11 @@ int main(int argc, const char* const* argv)
 	    }
 	  FILE* input;
 	  input = fopen(argv[2], "r");
-	  enum assemblei_instruction inst[512];
+	  enum bascii_instruction inst[512];
 	  size_t len;
-	  assembleic_parser(input,inst,&len, 0);
+	  bascii_parser(input,inst,&len, 0);
 	  FILE* file = fopen("generated.asm", "w");
-	  assembleic_codegen_x86_64_linux(file,inst,len);
+	  bascii_codegen_x86_64_linux(file,inst,len);
 	  return 0;
 	}
       else
@@ -56,7 +56,7 @@ int main(int argc, const char* const* argv)
     }
   
 	/* const char* code = "!+!!!!!!+#"; */
-	/* enum assemblei_code codes[512]; */
+	/* enum bascii_code codes[512]; */
 	/* int i; */
 	/* parser(codes, &i, code); */
 	/* FILE* file = fopen("generated.asm", "w"); */

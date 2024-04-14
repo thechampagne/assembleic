@@ -5,21 +5,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-enum assemblei_instruction {
-	ASSEMBLEI_INST_MOVES_FORWARD,
-	ASSEMBLEI_INST_MOVES_BACKWARD,
-	ASSEMBLEI_INST_PRINT_ALL,
-	ASSEMBLEI_INST_PRINT_CELL,
-	ASSEMBLEI_INST_INCREMENT,
-	ASSEMBLEI_INST_CLEAR_ALL,
+enum bascii_instruction {
+	BASCII_INST_MOVES_FORWARD,
+	BASCII_INST_MOVES_BACKWARD,
+	BASCII_INST_PRINT_ALL,
+	BASCII_INST_PRINT_CELL,
+	BASCII_INST_INCREMENT,
+	BASCII_INST_CLEAR_ALL,
 };
 
-void assembleic_parser(FILE* file, enum assemblei_instruction* inst, size_t* inst_out_len, size_t inst_cap);
+void bascii_parser(FILE* file, enum bascii_instruction* inst, size_t* inst_out_len, size_t inst_cap);
 
-void assembleic_codegen_x86_64_linux_header(FILE* file);
+void bascii_codegen_x86_64_linux_header(FILE* file);
 
-void assembleic_codegen_x86_64_linux_footer(FILE* file);
+void bascii_codegen_x86_64_linux_footer(FILE* file);
 
-void assembleic_codegen_x86_64_linux(FILE* file, const enum assemblei_instruction* inst, size_t inst_len);
+void bascii_codegen_x86_64_linux(FILE* file, const enum bascii_instruction* inst, size_t inst_len);
 
 #endif /* __BASCII_H__ */

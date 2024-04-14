@@ -1,6 +1,6 @@
 #include "bascii.h"
 
-void assembleic_codegen_x86_64_linux_header(FILE* file)
+void bascii_codegen_x86_64_linux_header(FILE* file)
 {
   fprintf(file, "format ELF64 executable 3\n");
   fprintf(file, "segment executable readable\n");
@@ -12,16 +12,16 @@ void assembleic_codegen_x86_64_linux_header(FILE* file)
   fprintf(file, "mov rdx, 1\n");
 }
 
-void assembleic_codegen_x86_64_linux_footer(FILE* file)
+void bascii_codegen_x86_64_linux_footer(FILE* file)
 {
   fprintf(file, "mov rax, 60\n");
   fprintf(file, "mov rdi, 0\n");
   fprintf(file, "syscall");
 }
 
-void assembleic_codegen_x86_64_linux(FILE* file, const enum assemblei_instruction* inst, size_t inst_len)
+void bascii_codegen_x86_64_linux(FILE* file, const enum bascii_instruction* inst, size_t inst_len)
 {
-  assembleic_codegen_x86_64_linux_header(file);
+  bascii_codegen_x86_64_linux_header(file);
   size_t cp = 0;
   char cells[8] = {0};
   int i;
@@ -29,23 +29,23 @@ void assembleic_codegen_x86_64_linux(FILE* file, const enum assemblei_instructio
     {
       switch(inst[i])
 	{
-	case ASSEMBLEI_INST_MOVES_FORWARD:
+	case BASCII_INST_MOVES_FORWARD:
 	  cp++;
 	  break;
-	case ASSEMBLEI_INST_MOVES_BACKWARD:
+	case BASCII_INST_MOVES_BACKWARD:
 	  cp--;
 	  break;
-	case ASSEMBLEI_INST_PRINT_ALL:
+	case BASCII_INST_PRINT_ALL:
 	  fprintf(file, "mov byte [rsp], %d%d%d%d%d%d%d%db\n", cells[0], cells[1], cells[2], cells[3], cells[4], cells[5], cells[6], cells[7]);
 	  fprintf(file, "syscall\n");
 	  break;
-	case ASSEMBLEI_INST_PRINT_CELL:
+	case BASCII_INST_PRINT_CELL:
 	  /* TODO */
 	  break;
-	case ASSEMBLEI_INST_INCREMENT:
+	case BASCII_INST_INCREMENT:
 	  cells[cp]++;
 	  break;
-	case ASSEMBLEI_INST_CLEAR_ALL:
+	case BASCII_INST_CLEAR_ALL:
 	  int j;
 	  for(j = 0; j < 8; j++) cells[j] = 0;
 	  fprintf(file, "mov byte [rsp], 00000000b\n");
@@ -53,5 +53,5 @@ void assembleic_codegen_x86_64_linux(FILE* file, const enum assemblei_instructio
 			
 	}
     }
-  assembleic_codegen_x86_64_linux_footer(file);
+  bascii_codegen_x86_64_linux_footer(file);
 }

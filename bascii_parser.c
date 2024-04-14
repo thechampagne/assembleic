@@ -1,6 +1,6 @@
 #include "bascii.h"
 
-void assembleic_parser(FILE* file, enum assemblei_instruction* inst, size_t* inst_out_len, size_t inst_cap)
+void bascii_parser(FILE* file, enum bascii_instruction* inst, size_t* inst_out_len, size_t inst_cap)
 {
   
   size_t inst_len = 0;
@@ -18,7 +18,7 @@ void assembleic_parser(FILE* file, enum assemblei_instruction* inst, size_t* ins
 	      fprintf(stderr, "Error: cell out of range\n");
 	      exit(1);
 	    }
-	  inst[inst_len] = ASSEMBLEI_INST_MOVES_FORWARD;
+	  inst[inst_len] = BASCII_INST_MOVES_FORWARD;
 	  inst_len++;
 	  break;
 	case '?':
@@ -28,15 +28,15 @@ void assembleic_parser(FILE* file, enum assemblei_instruction* inst, size_t* ins
 	      fprintf(stderr, "Error: cell out of range\n");
 	      exit(1);
 	    }
-	  inst[inst_len] = ASSEMBLEI_INST_MOVES_BACKWARD;
+	  inst[inst_len] = BASCII_INST_MOVES_BACKWARD;
 	  inst_len++;
 	  break;
 	case '#':
-	  inst[inst_len] = ASSEMBLEI_INST_PRINT_ALL;
+	  inst[inst_len] = BASCII_INST_PRINT_ALL;
 	  inst_len++;
 	  break;
 	case '.':
-	  inst[inst_len] = ASSEMBLEI_INST_PRINT_CELL;
+	  inst[inst_len] = BASCII_INST_PRINT_CELL;
 	  inst_len++;
 	  break;
 	case '+':
@@ -46,13 +46,13 @@ void assembleic_parser(FILE* file, enum assemblei_instruction* inst, size_t* ins
 	      fprintf(stderr, "Error: cell already incremented");
 	      exit(1);	
 	    }
-	  inst[inst_len] = ASSEMBLEI_INST_INCREMENT;
+	  inst[inst_len] = BASCII_INST_INCREMENT;
 	  inst_len++;
 	  break;
 	case ',':
 	  int j;
 	  for(j = 0; j < 8; j++) cells[j] = 0;
-	  inst[inst_len] = ASSEMBLEI_INST_CLEAR_ALL;
+	  inst[inst_len] = BASCII_INST_CLEAR_ALL;
 	  inst_len++;
 	  break;
 			
