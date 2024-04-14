@@ -4,6 +4,16 @@
 
 Bascii is an esoteric programming language that uses binary to form words.
 
+### Syntax
+
+Character | Meaning
+--------- | ---------
+<         | Moves to the next cell to the left. 
+>         | Moves to the next cell to the right.
++         | Increment the current cell by one.
+-         | Decrement the current cell by one.
+#         | Output the constructed byte of cells.
+
 ### Requirements
  - ANSI C Compiler - **C89**
 
