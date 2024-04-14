@@ -11,10 +11,11 @@ enum bascii_instruction {
 	BASCII_INST_PRINT_ALL,
 	BASCII_INST_PRINT_CELL,
 	BASCII_INST_INCREMENT,
+	BASCII_INST_DECREMENT,
 	BASCII_INST_CLEAR_ALL,
 };
 
-void bascii_parser(FILE* file, enum bascii_instruction* inst, size_t* inst_out_len, size_t inst_cap);
+void bascii_parser(FILE* file, enum bascii_instruction* inst, size_t* inst_out_len);
 
 void bascii_codegen_x86_64_linux_header(FILE* file);
 

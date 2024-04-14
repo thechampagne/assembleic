@@ -35,7 +35,7 @@ int main(int argc, const char* const* argv)
 	  input = fopen(argv[2], "r");
 	  enum bascii_instruction inst[512];
 	  size_t len;
-	  bascii_parser(input,inst,&len, 0);
+	  bascii_parser(input,inst,&len);
 	  FILE* file = fopen("generated.asm", "w");
 	  bascii_codegen_x86_64_linux(file,inst,len);
 	  return 0;
